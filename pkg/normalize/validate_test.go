@@ -314,17 +314,15 @@ func TestCheckDuplicates(t *testing.T) {
 		// The only difference is the rType:
 		makeRC("aaa", "example.com", "uniquestring.com.", models.RecordConfig{Type: "NS"}),
 		makeRC("aaa", "example.com", "uniquestring.com.", models.RecordConfig{Type: "PTR"}),
-		// The only difference is the TTL.
-		makeRC("zzz", "example.com", "4.4.4.4", models.RecordConfig{Type: "A", TTL: 111}),
-		makeRC("zzz", "example.com", "4.4.4.4", models.RecordConfig{Type: "A", TTL: 222}),
 		// Three records each with a different target.
 		makeRC("@", "example.com", "ns1.foo.com.", models.RecordConfig{Type: "NS"}),
 		makeRC("@", "example.com", "ns2.foo.com.", models.RecordConfig{Type: "NS"}),
 		makeRC("@", "example.com", "ns3.foo.com.", models.RecordConfig{Type: "NS"}),
+		// NOTE: The comparison ignores ttl. Therefore we don't test that.
 	}
 	errs := checkDuplicates(records)
 	if len(errs) != 0 {
-		t.Errorf("Expect duplicate NOT found but found %q", errs)
+		t.Errorf("Expected duplicate NOT found but found %q", errs)
 	}
 }
 
@@ -411,7 +409,7 @@ func TestCheckRecordSetHasMultipleTTLs_err_3type_2ttl(t *testing.T) {
 	}
 	errs := checkRecordSetHasMultipleTTLs(records)
 	if len(errs) != 0 {
-		t.Errorf("Expected 0 errors (differnt types, no errors), but got %d: %v", len(errs), errs)
+		t.Errorf("Expected 0 errors (different types, no errors), but got %d: %v", len(errs), errs)
 	}
 }
 
@@ -424,7 +422,7 @@ func TestCheckRecordSetHasMultipleTTLs_err_3type_3ttl(t *testing.T) {
 	}
 	errs := checkRecordSetHasMultipleTTLs(records)
 	if len(errs) != 1 {
-		t.Errorf("Expected 0 errors (differnt types, 1 error), but got %d: %v", len(errs), errs)
+		t.Errorf("Expected 0 errors (different types, 1 error), but got %d: %v", len(errs), errs)
 	}
 }
 

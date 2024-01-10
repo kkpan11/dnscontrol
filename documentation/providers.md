@@ -12,53 +12,58 @@ a provider that supports it, we'd love your contribution to ensure it works corr
 If a feature is definitively not supported for whatever reason, we would also like a PR to clarify why it is not supported, and fill in this entire matrix.
 
 <!-- provider-matrix-start -->
-| Provider name | Official Support | DNS Provider | Registrar | [`ALIAS`](functions/domain/ALIAS.md) | [`CAA`](functions/domain/CAA.md) | [`AUTODNSSEC`](functions/domain/AUTODNSSEC_ON.md) | [`LOC`](functions/domain/LOC.md) | [`NAPTR`](functions/domain/NAPTR.md) | [`PTR`](functions/domain/PTR.md) | [`SOA`](functions/domain/SOA.md) | [`SRV`](functions/domain/SRV.md) | [`SSHFP`](functions/domain/SSHFP.md) | [`TLSA`](functions/domain/TLSA.md) | [`DS`](functions/domain/DS.md) | dual host | create-domains | [`NO_PURGE`](functions/domain/NO_PURGE.md) | get-zones |
-| ------------- | ---------------- | ------------ | --------- | ------------------------------------ | -------------------------------- | ------------------------------------------------- | -------------------------------- | ------------------------------------ | -------------------------------- | -------------------------------- | -------------------------------- | ------------------------------------ | ---------------------------------- | ------------------------------ | --------- | -------------- | ------------------------------------------ | --------- |
-| [`AKAMAIEDGEDNS`](providers/akamaiedgedns.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ |
-| [`AUTODNS`](providers/autodns.md) | ❌ | ✅ | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| [`AXFRDDNS`](providers/axfrddns.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❌ | ❌ | ❌ | ❌ |
-| [`AZURE_DNS`](providers/azure_dns.md) | ✅ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❌ | ✅ | ❔ | ✅ | ❌ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ |
-| [`BIND`](providers/bind.md) | ✅ | ✅ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
-| [`CLOUDFLAREAPI`](providers/cloudflareapi.md) | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❌ | ✅ | ✅ | ✅ |
-| [`CLOUDNS`](providers/cloudns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ |
-| [`CSCGLOBAL`](providers/cscglobal.md) | ✅ | ✅ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ✅ |
-| [`DESEC`](providers/desec.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ |
-| [`DIGITALOCEAN`](providers/digitalocean.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❔ | ❌ | ❔ | ❔ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ✅ | ✅ | ✅ |
-| [`DNSIMPLE`](providers/dnsimple.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| [`DNSMADEEASY`](providers/dnsmadeeasy.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| [`DNSOVERHTTPS`](providers/dnsoverhttps.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
-| [`DOMAINNAMESHOP`](providers/domainnameshop.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❔ | ✅ | ❔ |
-| [`EASYNAME`](providers/easyname.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
-| [`EXOSCALE`](providers/exoscale.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ❔ | ❌ | ❔ | ❌ | ❌ | ✅ | ❔ |
-| [`GANDI_V5`](providers/gandi_v5.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❌ | ❔ | ❌ | ❌ | ✅ |
-| [`GCLOUD`](providers/gcloud.md) | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
-| [`GCORE`](providers/gcore.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| [`HEDNS`](providers/hedns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| [`HETZNER`](providers/hetzner.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [`HEXONET`](providers/hexonet.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❔ | ❔ | ❔ | ✅ | ❔ | ✅ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ |
-| [`HOSTINGDE`](providers/hostingde.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [`INTERNETBS`](providers/internetbs.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
-| [`INWX`](providers/inwx.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❔ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
-| [`LINODE`](providers/linode.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❔ | ❌ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ✅ |
-| [`LOOPIA`](providers/loopia.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ✅ |
-| [`LUADNS`](providers/luadns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
-| [`MSDNS`](providers/msdns.md) | ✅ | ✅ | ❌ | ❌ | ❌ | ❔ | ❌ | ✅ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ✅ |
-| [`NAMECHEAP`](providers/namecheap.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❔ | ❌ | ❔ | ❌ | ❔ | ❌ | ❔ | ❌ | ❔ | ❌ | ❌ | ❌ | ✅ |
-| [`NAMEDOTCOM`](providers/namedotcom.md) | ❌ | ✅ | ✅ | ✅ | ❔ | ❔ | ❌ | ❔ | ❌ | ❔ | ✅ | ❔ | ❔ | ❔ | ✅ | ❌ | ✅ | ✅ |
-| [`NETCUP`](providers/netcup.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❔ | ❌ | ❔ | ❌ | ❔ | ✅ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ❌ |
-| [`NETLIFY`](providers/netlify.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| [`NS1`](providers/ns1.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [`OPENSRS`](providers/opensrs.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
-| [`ORACLE`](providers/oracle.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| [`OVH`](providers/ovh.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❔ | ❔ | ❔ | ❌ | ❔ | ✅ | ✅ | ✅ | ❔ | ✅ | ❌ | ✅ | ✅ |
-| [`PACKETFRAME`](providers/packetframe.md) | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❔ | ❔ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ❔ |
-| [`PORKBUN`](providers/porkbun.md) | ❌ | ✅ | ❌ | ✅ | ❔ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| [`POWERDNS`](providers/powerdns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [`ROUTE53`](providers/route53.md) | ✅ | ✅ | ✅ | ❌ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
-| [`RWTH`](providers/rwth.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❌ | ✅ | ❔ | ✅ | ✅ | ❌ | ❔ | ❌ | ❌ | ✅ | ✅ |
-| [`SOFTLAYER`](providers/softlayer.md) | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❌ | ❔ | ❔ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
-| [`TRANSIP`](providers/transip.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ❌ | ❔ | ❌ | ✅ | ✅ |
-| [`VULTR`](providers/vultr.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❔ | ❌ | ❔ | ✅ | ✅ | ❌ | ❔ | ❔ | ✅ | ✅ | ✅ |
+| Provider name | Official Support | DNS Provider | Registrar | [`ALIAS`](functions/domain/ALIAS.md) | [`CAA`](functions/domain/CAA.md) | [`AUTODNSSEC`](functions/domain/AUTODNSSEC_ON.md) | [`LOC`](functions/domain/LOC.md) | [`NAPTR`](functions/domain/NAPTR.md) | [`PTR`](functions/domain/PTR.md) | [`SOA`](functions/domain/SOA.md) | [`SRV`](functions/domain/SRV.md) | [`SSHFP`](functions/domain/SSHFP.md) | [`TLSA`](functions/domain/TLSA.md) | [`DS`](functions/domain/DS.md) | [`DHCID`](functions/domain/DHCID.md) | dual host | create-domains | [`NO_PURGE`](functions/domain/NO_PURGE.md) | get-zones |
+| ------------- | ---------------- | ------------ | --------- | ------------------------------------ | -------------------------------- | ------------------------------------------------- | -------------------------------- | ------------------------------------ | -------------------------------- | -------------------------------- | -------------------------------- | ------------------------------------ | ---------------------------------- | ------------------------------ | ------------------------------------ | --------- | -------------- | ------------------------------------------ | --------- |
+| [`AKAMAIEDGEDNS`](providers/akamaiedgedns.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❔ | ✅ | ✅ | ❌ | ✅ |
+| [`AUTODNS`](providers/autodns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❔ | ❔ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`AXFRDDNS`](providers/axfrddns.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| [`AZURE_DNS`](providers/azure_dns.md) | ✅ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❌ | ✅ | ❔ | ✅ | ❌ | ❌ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`AZURE_PRIVATE_DNS`](providers/azure_private_dns.md) | ✅ | ✅ | ❌ | ❌ | ❌ | ❔ | ❌ | ❌ | ✅ | ❔ | ✅ | ❌ | ❌ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`BIND`](providers/bind.md) | ✅ | ✅ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| [`BUNNY_DNS`](providers/bunny_dns.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| [`CLOUDFLAREAPI`](providers/cloudflareapi.md) | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ❌ | ✅ | ✅ | ✅ |
+| [`CLOUDNS`](providers/cloudns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ❔ | ✅ | ✅ | ✅ |
+| [`CSCGLOBAL`](providers/cscglobal.md) | ✅ | ✅ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ✅ |
+| [`DESEC`](providers/desec.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ |
+| [`DIGITALOCEAN`](providers/digitalocean.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❔ | ❌ | ❔ | ❔ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ✅ | ✅ | ✅ |
+| [`DNSIMPLE`](providers/dnsimple.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ✅ | ✅ | ❌ | ❌ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`DNSMADEEASY`](providers/dnsmadeeasy.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ❌ | ❌ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`DNSOVERHTTPS`](providers/dnsoverhttps.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
+| [`DOMAINNAMESHOP`](providers/domainnameshop.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❔ | ❔ | ✅ | ❔ |
+| [`DYNADOT`](providers/dynadot.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
+| [`EASYNAME`](providers/easyname.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
+| [`EXOSCALE`](providers/exoscale.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ❔ | ❌ | ❔ | ❔ | ❌ | ❌ | ✅ | ❔ |
+| [`GANDI_V5`](providers/gandi_v5.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❌ | ❔ | ❔ | ❌ | ❌ | ✅ |
+| [`GCLOUD`](providers/gcloud.md) | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`GCORE`](providers/gcore.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`HEDNS`](providers/hedns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`HETZNER`](providers/hetzner.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`HEXONET`](providers/hexonet.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❔ | ❔ | ❔ | ✅ | ❔ | ✅ | ❔ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ❔ |
+| [`HOSTINGDE`](providers/hostingde.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`INTERNETBS`](providers/internetbs.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
+| [`INWX`](providers/inwx.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❔ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`LINODE`](providers/linode.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❔ | ❌ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`LOOPIA`](providers/loopia.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ | ❔ | ✅ | ❌ | ✅ | ✅ |
+| [`LUADNS`](providers/luadns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`MSDNS`](providers/msdns.md) | ✅ | ✅ | ❌ | ❌ | ❌ | ❔ | ❌ | ✅ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`MYTHICBEASTS`](providers/mythicbeasts.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ❌ | ✅ | ✅ |
+| [`NAMECHEAP`](providers/namecheap.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ❔ | ❌ | ❔ | ❌ | ❔ | ❌ | ❔ | ❌ | ❔ | ❔ | ❌ | ❌ | ❌ | ✅ |
+| [`NAMEDOTCOM`](providers/namedotcom.md) | ❌ | ✅ | ✅ | ✅ | ❔ | ❔ | ❌ | ❔ | ❌ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ✅ | ❌ | ✅ | ✅ |
+| [`NETCUP`](providers/netcup.md) | ❌ | ✅ | ❌ | ❔ | ✅ | ❔ | ❌ | ❔ | ❌ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ❌ |
+| [`NETLIFY`](providers/netlify.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❔ | ✅ | ❌ | ❌ | ❌ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`NS1`](providers/ns1.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❔ | ✅ | ❔ | ❔ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`OPENSRS`](providers/opensrs.md) | ❌ | ❌ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
+| [`ORACLE`](providers/oracle.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❔ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ❌ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`OVH`](providers/ovh.md) | ❌ | ✅ | ✅ | ❌ | ✅ | ❔ | ❔ | ❔ | ❌ | ❔ | ✅ | ✅ | ✅ | ❔ | ❔ | ✅ | ❌ | ✅ | ✅ |
+| [`PACKETFRAME`](providers/packetframe.md) | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❔ | ❔ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❌ | ❌ | ✅ | ❔ |
+| [`PORKBUN`](providers/porkbun.md) | ❌ | ✅ | ✅ | ✅ | ❔ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`POWERDNS`](providers/powerdns.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`REALTIMEREGISTER`](providers/realtimeregister.md) | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| [`ROUTE53`](providers/route53.md) | ✅ | ✅ | ✅ | ❌ | ✅ | ❔ | ❌ | ❔ | ✅ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ✅ | ✅ | ✅ | ✅ |
+| [`RWTH`](providers/rwth.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❌ | ✅ | ❔ | ✅ | ✅ | ❌ | ❔ | ❔ | ❌ | ❌ | ✅ | ✅ |
+| [`SOFTLAYER`](providers/softlayer.md) | ❌ | ✅ | ❌ | ❔ | ❔ | ❔ | ❌ | ❔ | ❔ | ❔ | ✅ | ❔ | ❔ | ❔ | ❔ | ❔ | ❌ | ✅ | ❔ |
+| [`TRANSIP`](providers/transip.md) | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ | ❔ | ❔ | ✅ | ✅ | ✅ | ❌ | ❔ | ❔ | ❌ | ✅ | ✅ |
+| [`VULTR`](providers/vultr.md) | ❌ | ✅ | ❌ | ❌ | ✅ | ❔ | ❌ | ❔ | ❌ | ❔ | ✅ | ✅ | ❌ | ❔ | ❔ | ❔ | ✅ | ✅ | ✅ |
 <!-- provider-matrix-end -->
 
 ### Providers with "official support"
@@ -93,20 +98,23 @@ provided to help community members support their code independently.
 
 Expectations of maintainers:
 
-* Maintainers are expected to support their provider and/or find a new maintainer.
+* Maintainers are expected to support their provider and/or help find a new maintainer.
 * Maintainers should set up test accounts and periodically verify that all tests pass (`pkg/js/parse_tests` and `integrationTest`).
 * Contributors are encouraged to add new tests and refine old ones. (Test-driven development is encouraged.)
 * Bugs will be referred to the maintainer or their designate.
-* Maintainers must be responsible to bug reports and PRs.  If a maintainer is unresponsive for more than 2 months, we will consider disabling the provider.  First we will put out a call for new maintainer. If noboby volunteers, the provider will be disabled.
+* Maintainers must be responsible to bug reports and PRs.  If a maintainer is unresponsive for more than 2 months, we will consider disabling the provider.  First we will put out a call for new maintainer. If nobody volunteers, the provider may be disabled.
+* Tom needs to know your real email address.  Please email tlimoncelli at stack over flow dot com so he has it.
 
 Providers in this category and their maintainers are:
 
 |Name|Maintainer|
 |---|---|
+|[`AZURE_PRIVATE_DNS`](providers/azure_private_dns.md)|@matthewmgamble|
 |[`AKAMAIEDGEDNS`](providers/akamaiedgedns.md)|@svernick|
 |[`AXFRDDNS`](providers/axfrddns.md)|@hnrgrgr|
+|[`BUNNY_DNS`](providers/bunny_dns.md)|@ppmathis|
 |[`CLOUDFLAREAPI`](providers/cloudflareapi.md)|@tresni|
-|[`CLOUDNS`](providers/CLOUDNS.md)|@pragmaton|
+|[`CLOUDNS`](providers/cloudns.md)|@pragmaton|
 |[`CSCGLOBAL`](providers/cscglobal.md)|@Air-New-Zealand|
 |[`DESEC`](providers/desec.md)|@D3luxee|
 |[`DIGITALOCEAN`](providers/digitalocean.md)|@Deraen|
@@ -131,11 +139,12 @@ Providers in this category and their maintainers are:
 |[`NETCUP`](providers/netcup.md)|@kordianbruck|
 |[`NETLIFY`](providers/netlify.md)|@SphericalKat|
 |[`NS1`](providers/ns1.md)|@costasd|
-|[`OPENSRS`](providers/opensrs.md)|@pierre-emmanuelJ|
+|[`OPENSRS`](providers/opensrs.md)|@philhug|
 |[`ORACLE`](providers/oracle.md)|@kallsyms|
 |[`OVH`](providers/ovh.md)|@masterzen|
 |[`PACKETFRAME`](providers/packetframe.md)|@hamptonmoore|
 |[`POWERDNS`](providers/powerdns.md)|@jpbede|
+|[`REALTIMEREGISTER`](providers/realtimeregister.md)|@PJEilers|
 |[`ROUTE53`](providers/route53.md)|@tresni|
 |[`RWTH`](providers/rwth.md)|@MisterErwin|
 |[`SOFTLAYER`](providers/softlayer.md)|@jamielennox|
@@ -149,11 +158,11 @@ code to support this provider, we'd be glad to help in any way.
 
 * [1984 Hosting](https://github.com/StackExchange/dnscontrol/issues/1251) (#1251)
 * [Alibaba Cloud DNS](https://github.com/StackExchange/dnscontrol/issues/420)(#420)
-* [BunnyDNS](https://github.com/StackExchange/dnscontrol/issues/2265)(#2265)
 * [Constellix (DNSMadeEasy)](https://github.com/StackExchange/dnscontrol/issues/842) (#842)
 * [CoreDNS](https://github.com/StackExchange/dnscontrol/issues/1284) (#1284)
 * [EU.ORG](https://github.com/StackExchange/dnscontrol/issues/1176) (#1176)
 * [EnCirca](https://github.com/StackExchange/dnscontrol/issues/1048) (#1048)
+* [GoDaddy](https://github.com/StackExchange/dnscontrol/issues/2596) (#2596)
 * [Imperva](https://github.com/StackExchange/dnscontrol/issues/1484) (#1484)
 * [Infoblox DNS](https://github.com/StackExchange/dnscontrol/issues/1077) (#1077)
 * [Joker.com](https://github.com/StackExchange/dnscontrol/issues/854) (#854)
@@ -165,7 +174,7 @@ code to support this provider, we'd be glad to help in any way.
 
 #### Q: Why are the above GitHub issues marked "closed"?
 
-A: Following [the bug triage process](/developer-info/bug-triage), the request
+A: Following [the bug triage process](bug-triage.md), the request
 is closed once it is added to this list. If someone chooses to implement the
 provider, they re-open the issue.
 

@@ -3,11 +3,11 @@ package porkbun
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/StackExchange/dnscontrol/v4/models"
-	"github.com/StackExchange/dnscontrol/v4/pkg/diff"
 	"github.com/StackExchange/dnscontrol/v4/pkg/diff2"
 	"github.com/StackExchange/dnscontrol/v4/pkg/printer"
 	"github.com/StackExchange/dnscontrol/v4/providers"
@@ -25,8 +25,16 @@ var defaultNS = []string{
 	"salvador.ns.porkbun.com",
 }
 
-// NewPorkbun creates the provider.
-func NewPorkbun(m map[string]string, metadata json.RawMessage) (providers.DNSServiceProvider, error) {
+func newReg(conf map[string]string) (providers.Registrar, error) {
+	return newPorkbun(conf, nil)
+}
+
+func newDsp(conf map[string]string, metadata json.RawMessage) (providers.DNSServiceProvider, error) {
+	return newPorkbun(conf, metadata)
+}
+
+// newPorkbun creates the provider.
+func newPorkbun(m map[string]string, metadata json.RawMessage) (*porkbunProvider, error) {
 	c := &porkbunProvider{}
 
 	c.apiKey, c.secretKey = m["api_key"], m["secret_key"]
@@ -63,8 +71,9 @@ var features = providers.DocumentationNotes{
 }
 
 func init() {
+	providers.RegisterRegistrarType("PORKBUN", newReg)
 	fns := providers.DspFuncs{
-		Initializer:   NewPorkbun,
+		Initializer:   newDsp,
 		RecordAuditor: AuditRecords,
 	}
 	providers.RegisterDomainServiceProviderType("PORKBUN", fns, features)
@@ -77,6 +86,7 @@ func (c *porkbunProvider) GetNameservers(domain string) ([]*models.Nameserver, e
 
 // GetZoneRecordsCorrections returns a list of corrections that will turn existing records into dc.Records.
 func (c *porkbunProvider) GetZoneRecordsCorrections(dc *models.DomainConfig, existingRecords models.Records) ([]*models.Correction, error) {
+	var corrections []*models.Correction
 
 	// Block changes to NS records for base domain
 	checkNSModifications(dc)
@@ -84,61 +94,6 @@ func (c *porkbunProvider) GetZoneRecordsCorrections(dc *models.DomainConfig, exi
 	// Make sure TTL larger than the minimum TTL
 	for _, record := range dc.Records {
 		record.TTL = fixTTL(record.TTL)
-	}
-
-	var corrections []*models.Correction
-	if !diff2.EnableDiff2 {
-
-		differ := diff.New(dc)
-		_, create, del, modify, err := differ.IncrementalDiff(existingRecords)
-		if err != nil {
-			return nil, err
-		}
-
-		// Deletes first so changing type works etc.
-		for _, m := range del {
-			id := m.Existing.Original.(*domainRecord).ID
-			corr := &models.Correction{
-				Msg: fmt.Sprintf("%s, porkbun ID: %s", m.String(), id),
-				F: func() error {
-					return c.deleteRecord(dc.Name, id)
-				},
-			}
-			corrections = append(corrections, corr)
-		}
-
-		for _, m := range create {
-			req, err := toReq(m.Desired)
-			if err != nil {
-				return nil, err
-			}
-
-			corr := &models.Correction{
-				Msg: m.String(),
-				F: func() error {
-					return c.createRecord(dc.Name, req)
-				},
-			}
-			corrections = append(corrections, corr)
-		}
-
-		for _, m := range modify {
-			id := m.Existing.Original.(*domainRecord).ID
-			req, err := toReq(m.Desired)
-			if err != nil {
-				return nil, err
-			}
-
-			corr := &models.Correction{
-				Msg: fmt.Sprintf("%s, porkbun ID: %s", m.String(), id),
-				F: func() error {
-					return c.modifyRecord(dc.Name, id, req)
-				},
-			}
-			corrections = append(corrections, corr)
-		}
-
-		return corrections, nil
 	}
 
 	changes, err := diff2.ByRecord(existingRecords, dc, nil)
@@ -316,4 +271,32 @@ func fixTTL(ttl uint32) uint32 {
 		return ttl
 	}
 	return minimumTTL
+}
+
+func (c *porkbunProvider) GetRegistrarCorrections(dc *models.DomainConfig) ([]*models.Correction, error) {
+	nss, err := c.getNameservers(dc.Name)
+	if err != nil {
+		return nil, err
+	}
+	foundNameservers := strings.Join(nss, ",")
+
+	expected := []string{}
+	for _, ns := range dc.Nameservers {
+		expected = append(expected, ns.Name)
+	}
+	sort.Strings(expected)
+	expectedNameservers := strings.Join(expected, ",")
+
+	if foundNameservers == expectedNameservers {
+		return nil, nil
+	}
+
+	return []*models.Correction{
+		{
+			Msg: fmt.Sprintf("Update nameservers %s -> %s", foundNameservers, expectedNameservers),
+			F: func() error {
+				return c.updateNameservers(expected, dc.Name)
+			},
+		},
+	}, nil
 }

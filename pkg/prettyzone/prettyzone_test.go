@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"strings"
 	"testing"
 
 	"github.com/StackExchange/dnscontrol/v4/models"
@@ -247,6 +248,46 @@ var testdataZFCAA = `$TTL 300
                  IN CAA   0 issuewild ";"
 `
 
+// r is shorthand for strings.Repeat()
+func r(s string, c int) string { return strings.Repeat(s, c) }
+
+func TestWriteZoneFileTxt(t *testing.T) {
+	// Do round-trip tests on various length TXT records.
+	t10 := `t10              IN TXT   "ten4567890"`
+	t254 := `t254             IN TXT   "` + r("a", 254) + `"`
+	t255 := `t255             IN TXT   "` + r("b", 255) + `"`
+	t256 := `t256             IN TXT   "` + r("c", 255) + `" "` + r("D", 1) + `"`
+	t509 := `t509             IN TXT   "` + r("e", 255) + `" "` + r("F", 254) + `"`
+	t510 := `t510             IN TXT   "` + r("g", 255) + `" "` + r("H", 255) + `"`
+	t511 := `t511             IN TXT   "` + r("i", 255) + `" "` + r("J", 255) + `" "` + r("k", 1) + `"`
+	t512 := `t511             IN TXT   "` + r("L", 255) + `" "` + r("M", 255) + `" "` + r("n", 2) + `"`
+	t513 := `t511             IN TXT   "` + r("o", 255) + `" "` + r("P", 255) + `" "` + r("q", 3) + `"`
+	for i, d := range []string{t10, t254, t255, t256, t509, t510, t511, t512, t513} {
+		// Make the rr:
+		rr, err := dns.NewRR(d)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		// Make the expected zonefile:
+		ez := "$TTL 3600\n" + d + "\n"
+
+		// Generate the zonefile:
+		buf := &bytes.Buffer{}
+		WriteZoneFileRR(buf, []dns.RR{rr}, "bosun.org")
+		gz := buf.String()
+		if gz != ez {
+			t.Log("got: " + gz)
+			t.Log("wnt: " + ez)
+			t.Fatalf("Zone file %d does not match.", i)
+		}
+
+		// Reverse the process. Turn the zonefile into a list of records
+		parseAndRegen(t, buf, ez)
+	}
+
+}
+
 // Test 1 of each record type
 
 func mustNewRR(s string) dns.RR {
@@ -272,6 +313,7 @@ func TestWriteZoneFileEach(t *testing.T) {
 	d = append(d, mustNewRR(`_443._tcp.bosun.org. 300 IN TLSA  3 1 1 abcdef0`)) // Label must be _port._proto
 	d = append(d, mustNewRR(`sub.bosun.org.       300 IN NS    bosun.org.`))    // Must be a label with no other records.
 	d = append(d, mustNewRR(`x.bosun.org.         300 IN CNAME bosun.org.`))    // Must be a label with no other records.
+	d = append(d, mustNewRR(`bosun.org.           300 IN DHCID   AAIBY2/AuCccgoJbsaxcQc9TUapptP69lOjxfNuVAA2kjEA=`))
 	buf := &bytes.Buffer{}
 	WriteZoneFileRR(buf, d, "bosun.org")
 	if buf.String() != testdataZFEach {
@@ -289,6 +331,7 @@ var testdataZFEach = `$TTL 300
                  IN SRV   10 10 9999 foo.com.
                  IN TXT   "my text"
                  IN CAA   0 issue "letsencrypt.org"
+                 IN DHCID AAIBY2/AuCccgoJbsaxcQc9TUapptP69lOjxfNuVAA2kjEA=
 4.5              IN PTR   y.bosun.org.
 _443._tcp        IN TLSA  3 1 1 abcdef0
 sub              IN NS    bosun.org.
@@ -321,10 +364,10 @@ func TestWriteZoneFileSynth(t *testing.T) {
 ; c4
 @                IN A     192.30.252.153
                  IN A     192.30.252.154
-;myalias          IN R53_ALIAS  atype= zone_id=
-;myalias          IN R53_ALIAS  atype= zone_id=
+;myalias          IN R53_ALIAS  atype= zone_id= evaluate_target_health=
+;myalias          IN R53_ALIAS  atype= zone_id= evaluate_target_health=
 www              IN CNAME bosun.org.
-;zalias           IN R53_ALIAS  atype= zone_id=
+;zalias           IN R53_ALIAS  atype= zone_id= evaluate_target_health=
 `
 	if buf.String() != expected {
 		t.Log(buf.String())
